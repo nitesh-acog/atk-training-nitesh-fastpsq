@@ -1,39 +1,22 @@
-# FAST API implementation with Persistant queue service
+How to use the package
 ```
-fastapi and jinja templating
+from atk_training_nitesh_fastapipsq.main import server
+server()
+# to start the localhost server use the above function
 ```
-Types of Api's
-+ REST (Represenataion state transfer)
-+ RPC (remote procedure call)
-+ SOAP (simple object access protocol)
+How to use the command
+```
+atk-nitesh-server --help
+# look for help in terminal
+```
+```
+In the UI look for path /queue to see the items items added to queue
+```
+```
+atk-nitesh-consumer "path for config file"
+```
+```
+atk-nitesh-manager "path for config file"
+```
 
-```
-fastapi is a fast,modern, High performance web application framework used for building API's
-```
-FastApi is based on pydentic and typehints
-```
-Fastapi fully supports asynchronous programming
-```
-why Fastapi?
-Uber, Netflix and many other use it ...... why not .... it is open sourced.
 
-```
-# we need a server to run fastapi
-# in flask and Django we have wsgi for fastapi asgi
-pip install "uvicorn[standard]"
-```
-```
-uvicorn main:app --reload
-```
-```
-Operation" here refers to one of the HTTP "methods".
-path operation here refers to
-
-One of:
-
-+ POST
-+ GET
-+ PUT
-+ DELETE
-```
-<button onclick="location.href='{{ url_for('/') }}';">Click me</button>

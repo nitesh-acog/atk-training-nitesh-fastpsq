@@ -46,7 +46,6 @@ def get_db():
 async def get_voice(request: Request,db: Session = Depends(get_db)):
     data:bytes=await request.body()
     data:str=data.decode("utf-8").split('\n')[4].strip()
-    print(data)
     sql_=SQLITE()
     sql_.put(data)
 

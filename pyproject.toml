@@ -13,7 +13,7 @@ typer = "^0.7.0"
 db-sqlite3 = "^0.0.1"
 uvicorn = {extras = ["standard"], version = "^0.20.0"}
 sqlalchemy = "^1.4.45"
-atk-training-nitesh-psq = "^0.1.0"
+atk-training-nitesh-psq = "^0.1.2"
 
 [tool.poetry.scripts]
 atk-nitesh-server = "atk_training_nitesh_fastapipsq.main:server"

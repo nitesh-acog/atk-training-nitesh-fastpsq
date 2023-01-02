@@ -6,8 +6,8 @@ argon2-cffi-bindings==21.2.0
 arrow==1.2.3
 asttokens==2.2.1
 # Editable Git install with no remote (atk-training-nitesh-fastapipsq==0.1.0)
-
-atk-training-nitesh-psq==0.1.1
+-e /Users/nitesh/Desktop/work/atk-training-nitesh-fastapiPSQ
+atk-training-nitesh-psq==0.1.2
 attrs==22.2.0
 backcall==0.2.0
 beautifulsoup4==4.11.1
