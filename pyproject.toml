@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "atk-training-nitesh-fastapipsq"
+version = "0.1.0"
+description = ""
+authors = ["Nitesh <nitesh@aganitha.ai>"]
+readme = "README.md"
+packages = [{include = "atk_training_nitesh_fastapipsq"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["all"], version = "^0.88.0"}
+typer = "^0.7.0"
+db-sqlite3 = "^0.0.1"
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+sqlalchemy = "^1.4.45"
+atk-training-nitesh-psq = "^0.1.0"
+
+[tool.poetry.scripts]
+atk-nitesh-server = "atk_training_nitesh_fastapipsq.main:server"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+notebook = "^6.5.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

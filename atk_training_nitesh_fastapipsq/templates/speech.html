@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<style>
+    body {
+  background-image: url("https://images.pexels.com/photos/62693/pexels-photo-62693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+}
+* {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #0d122b;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  h1 {
+    text-align: center;
+    font-weight: 100;
+  }
+  header {
+    border-bottom: 1px solid #0d122b;
+    margin-bottom: 2em;
+  }
+  main {
+    flex-grow: 2;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 12px;
+    margin-bottom: 2em;
+    padding-top: 4em;
+    text-align: center;
+  }
+  @keyframes bg-pulse {
+    0% {
+      background-color: #fff;
+    }
+  
+    50% {
+      background-color: #c7ecee;
+    }
+  
+    100% {
+      backgrouond-color: #fff;
+    }
+  }
+  main.speaking {
+    animation: bg-pulse 1.5s alternate ease-in-out infinite;
+  }
+  #result {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+  }
+  #result .final {
+    color: #0d122b;
+    font-style: normal;
+  }
+  button {
+    font-size: 18px;
+    font-weight: 200;
+    padding: 1em;
+    width: 200px;
+    background: transparent;
+    border: 4px solid #f22f46;
+    border-radius: 4px;
+    transition: all 0.4s ease 0s;
+    cursor: pointer;
+    color: #f22f46;
+    margin-bottom: 4em;
+  }
+  button:hover,
+  button:focus {
+    background: #f22f46;
+    color: #fff;
+  }
+  
+  a {
+    color: #0d122b;
+  }
+  .error {
+    color: #f22f46;
+    text-align: center;
+  }
+  footer {
+    border-top: 1px solid #0d122b;
+    text-align: center;
+  }
+
+
+
+</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Assistant</title>
+    
+  </head>
+  <body>
+    <header>
+      <h1>VOICE ASSISTANT| MAKE SURE TO OPEN IN CHROME</h1>
+    </header>
+    <main>
+      <button id="button">Start listening</button>
+      <div id="result"></div>
+      <p id="message" hidden aria-hidden="true">
+        Your browser doesn't support Speech Recognition. Sorry.
+      </p>
+    </main>
+  
+    <script>
+window.addEventListener("DOMContentLoaded", () => {
+  const button = document.getElementById("button");
+  const result = document.getElementById("result");
+  const main = document.getElementsByTagName("main")[0];
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+  if (typeof SpeechRecognition === "undefined") {
+    button.remove();
+    const message = document.getElementById("message");
+    message.removeAttribute("hidden");
+    message.setAttribute("aria-hidden", "false");
+  } else {
+    let listening = false;
+    const recognition = new SpeechRecognition();
+        const start = () => {
+      recognition.start();
+      recognition.onresult = (event) => {
+     if (event.results[0].isFinal) {
+       const recordedChunks=[]
+
+      const speechToText = event.results[0][0].transcript;
+      recordedChunks.push(speechToText)
+      var xhttp = new XMLHttpRequest();
+     const blob= new Blob(recordedChunks);
+     xhttp.open("POST", 'http://localhost:8000/speechrecognition', true);
+      var data = new FormData();
+
+    data.append('data', blob, 'recognition');
+    console.log('data  received')
+    xhttp.send(data);
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);     
+         }
+    };
+
+    }; 
+
+
+  }
+
+
+      button.textContent = "Stop listening";
+      main.classList.add("speaking");
+    };
+    const stop = () => {
+      recognition.stop();
+      button.textContent = "Start listening";
+      main.classList.remove("speaking");
+    };
+
+    const onResult = event => {
+      result.innerHTML = "";
+      for (const res of event.results) {
+        const text = document.createTextNode(res[0].transcript);
+        const p = document.createElement("p");
+        if (res.isFinal) {
+          p.classList.add("final");
+        }
+        p.appendChild(text);
+        result.appendChild(p);
+      }
+    }
+    recognition.continuous = true;
+          recognition.interimResults = true;
+          recognition.addEventListener("result", onResult);
+
+          button.addEventListener("click", () => {
+            listening ? stop() : start();
+            listening = !listening;
+          });
+
+
+  }
+
+});
+//write after this the audio players
+
+
+
+
+
+
+function release(){
+
+
+    const chunk=[];
+    const data1='remove'
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", 'http://localhost:8000/speechrecognition', true);
+    chunk.push(data1);
+    const blob = new Blob(chunk);
+
+    var data = new FormData();
+    
+    
+    data.append('data1', blob, 'remove');
+    xhttp.send(data);
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);     
+         }
+    };
+      
+
+     }
+
+  
+    
+
+
+
+
+
+
+
+
+  
+    
+
+</script>
+
+  </body>
+</html>
