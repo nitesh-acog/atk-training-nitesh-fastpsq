@@ -24,11 +24,12 @@ jobs:
         uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: checking if the repo has been cloned
+      - name: sync the static files in remote machine
         run: |
           cd ~
           mkdir .ssh && touch .ssh/authorized_keys
           echo "${{secrets.VM_PUBLIC_KEY}}" 1> .ssh/authorized_keys
-          cat .ssh/authorized_keys
+          echo $GITHUB_WORKSPACE
+          
 
         
