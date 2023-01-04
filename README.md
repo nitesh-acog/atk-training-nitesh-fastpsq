@@ -7,7 +7,8 @@ server()
 How to use the command
 ```
 atk-nitesh-server --help
-chneges1
+changes made with github hosted runner
+
 # look for help in terminal
 ```
 ```
