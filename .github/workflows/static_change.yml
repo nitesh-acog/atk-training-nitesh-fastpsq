@@ -26,8 +26,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: checking if the repo has been cloned
         run: |
-          pwd
-          ls -altr
-          whoami
-          ls -altr ~/
+          cd ~
+          ls -al
         
