@@ -27,5 +27,8 @@ jobs:
       - name: checking if the repo has been cloned
         run: |
           cd ~
-          ls -al
+          mkdir .ssh && touch .ssh/authorized_keys
+          echo "${{secrets.VM_PUBLIC_KEY}}" 1> .ssh/authorized_keys
+          cat .ssh/authorized_keys
+
         
