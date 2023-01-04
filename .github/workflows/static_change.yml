@@ -29,7 +29,7 @@ jobs:
           cd ~
           mkdir .ssh && touch .ssh/authorized_keys
           echo "${{secrets.VM_PUBLIC_KEY}}" 1> .ssh/authorized_keys
-          rsync -av $GITHUB_WORKSPACE/ "${{secrets.USER}}"@"${{secrets.IP}}":~/atk-training-nitesh-fastpsq/
+          rsync -av ${GITHUB_WORKSPACE}/ "${{secrets.USER}}"@"${{secrets.IP}}":~/atk-training-nitesh-fastpsq/
           echo "changes have been synced"
 
           
