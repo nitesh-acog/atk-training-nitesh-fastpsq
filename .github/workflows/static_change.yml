@@ -24,20 +24,16 @@ jobs:
         uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Deploy to server
-        id: deploy
-        uses: Pendect/action-rsyncer@v1.1.0
+      - name: deploy to server
+        uses: AEnterprise/rsync-deploy@v1.0
         env:
-          DEPLOY_KEY: ${{secrets.VM_PUBLIC_KEY}}
-        with:
-          flags: '-avzr --delete'
-          options: ''
-          ssh_options: '-p 22'
-          src: ${GITHUB_WORKSPACE}
-          dest: 'nitesh@20.197.1.204:~/atk-training-nitesh-fastpsq'
-
-      - name: Display status from deploy
-        run: echo "${{ steps.deploy.outputs.status }}"
+          DEPLOY_KEY: ${{ secrets.VM_PUBLIC_KEY }}
+          ARGS: "-e -c -r --delete"
+          SERVER_PORT: 22
+          FOLDER: ${GITHUB_WORKSPACE}/
+          SERVER_IP: 20.197.1.204
+          USERNAME: nitesh
+          SERVER_DESTINATION: ~/atk-training-nitesh-fastpsq/
 
           
 
