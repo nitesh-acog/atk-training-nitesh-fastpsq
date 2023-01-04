@@ -7,6 +7,7 @@ server()
 How to use the command
 ```
 atk-nitesh-server --help
+chneges1
 # look for help in terminal
 ```
 ```
